@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://57d7a7xpl75j"]
+
+[ext_resource type="Material" uid="uid://dklwoyejymph8" path="res://assets/materials/sandbrick.tres" id="1_j5lm7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7cs00"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_lgccu"]
+
+[node name="BoxTest" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_7cs00")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_j5lm7")
+mesh = SubResource("BoxMesh_lgccu")

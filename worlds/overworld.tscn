@@ -1,0 +1,87 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfjqsn401hyb5"]
+
+[ext_resource type="PackedScene" uid="uid://b2clo631cpvii" path="res://components/controllable_character.tscn" id="1_r26h4"]
+[ext_resource type="PackedScene" uid="uid://57d7a7xpl75j" path="res://components/simple_cube.tscn" id="2_dnl4o"]
+
+[node name="Root" type="Node3D"]
+
+[node name="BoxTest" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3934, -0.651157, -2.17361)
+
+[node name="BoxTest2" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.39899, -0.651157, -2.17361)
+
+[node name="BoxTest3" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.389109, -0.651157, -2.17361)
+
+[node name="BoxTest4" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.53703, -0.549605, -3.15396)
+
+[node name="BoxTest5" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3934, -0.651157, -1.17156)
+
+[node name="BoxTest6" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.39899, -0.651157, -1.17156)
+
+[node name="BoxTest7" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.389109, -0.651157, -1.17156)
+
+[node name="BoxTest8" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.53703, -0.35115, -4.12523)
+
+[node name="BoxTest9" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.617491, -0.651157, -2.17361)
+
+[node name="BoxTest10" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.617491, -0.651157, -1.17156)
+
+[node name="BoxTest11" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.62492, -0.651157, -2.17361)
+
+[node name="BoxTest12" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.62492, -0.651157, -1.17156)
+
+[node name="BoxTest13" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62373, -0.651157, -2.17361)
+
+[node name="BoxTest14" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62373, -0.651157, -1.17156)
+
+[node name="BoxTest15" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.389109, -0.651157, 0.843128)
+
+[node name="BoxTest16" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.380107, -0.651157, -0.183979)
+
+[node name="BoxTest17" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.617491, -0.651157, -0.15892)
+
+[node name="BoxTest18" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.617491, -0.651157, 0.843128)
+
+[node name="BoxTest19" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.62492, -0.651157, -0.15892)
+
+[node name="BoxTest20" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.62492, -0.651157, 0.843128)
+
+[node name="BoxTest21" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62373, -0.651157, -0.15892)
+
+[node name="BoxTest22" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62373, -0.651157, 0.843128)
+
+[node name="Player" parent="." instance=ExtResource("1_r26h4")]
+transform = Transform3D(4, 0, 0, 0, 4, 1.19209e-07, 0, -1.19209e-07, 4, 0, 0.613361, 0)
+
+[node name="BoxTest23" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38614, -0.651157, -0.15892)
+
+[node name="BoxTest24" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38614, -0.651157, 0.843128)
+
+[node name="BoxTest25" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.38733, -0.651157, -0.15892)
+
+[node name="BoxTest26" parent="." instance=ExtResource("2_dnl4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.38733, -0.651157, 0.843128)

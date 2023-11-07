@@ -2,4 +2,6 @@
 .godot/
 
 # Helper file ignores
-assets/
+assets/audio
+assets/models
+assets/textures
