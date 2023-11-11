@@ -73,7 +73,7 @@ IF %media%==1 GOTO PAudio
 echo Packing Audio
 echo --------------------------
 cd ./assets/audio
-call rar a ../../audio.assets .
+call rar a -r ../../audio.assets .
 echo --------------------------
 cd ../..
 :: This only skips the other options if specifically Audio was picked. Other options will roll over
@@ -82,7 +82,7 @@ IF %media%==1 GOTO End
 echo Packing Models
 echo --------------------------
 cd ./assets/models
-call rar a ../../models.assets .
+call rar a -r ../../models.assets .
 echo --------------------------
 cd ../..
 :: This only skips the other options if specifically Models was picked. Other options will roll over
@@ -91,7 +91,7 @@ IF %media%==2 GOTO End
 echo Packing Textures
 echo --------------------------
 cd ./assets/textures
-call rar a ../../textures.assets .
+call rar a -r ../../textures.assets .
 echo --------------------------
 cd ../..
 GOTO End

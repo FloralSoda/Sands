@@ -104,7 +104,7 @@ elif [[ $oper -eq 1 ]]; then
 		echo "Packing Textures"
 		echo "--------------------------"
 		cd ./assets/textures
-		rar a ../../textures.assets .
+		rar a -r ../../textures.assets .
 		echo "--------------------------"
 		cd ../..
 	fi
@@ -113,7 +113,7 @@ elif [[ $oper -eq 1 ]]; then
 		echo "Packing Models"
 		echo "--------------------------"
 		cd ./assets/models
-		rar a ../../models.assets .
+		rar a -r ../../models.assets .
 		echo "--------------------------"
 		cd ../..
 	fi
@@ -122,7 +122,7 @@ elif [[ $oper -eq 1 ]]; then
 		echo "Packing Audio"
 		echo "--------------------------"
 		cd ./assets/audio
-		rar a ../../audio.assets .
+		rar a -r ../../audio.assets .
 		echo "--------------------------"
 		cd ../..
 	fi
