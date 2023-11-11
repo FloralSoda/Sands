@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b2clo631cpvii"]
+[gd_scene load_steps=26 format=3 uid="uid://b2clo631cpvii"]
 
 [ext_resource type="Script" path="res://logic/interaction/movement.cs" id="1_8kwco"]
 [ext_resource type="Texture2D" uid="uid://di8pdhu2jvru0" path="res://assets/textures/anim/player/player_idle1.png" id="1_qt7bp"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://dyebyag3jrmg8" path="res://assets/textures/anim/player/player_up3.png" id="19_godjp"]
 [ext_resource type="Texture2D" uid="uid://c4cnh3q3h2550" path="res://assets/textures/anim/player/player_up4.png" id="20_3e8wv"]
 [ext_resource type="Texture2D" uid="uid://dy43k8v3aii2w" path="res://assets/textures/anim/player/player_up5.png" id="21_1q8ra"]
+[ext_resource type="PackedScene" uid="uid://b2mmt8uc572f3" path="res://components/pixel_camera.tscn" id="23_unxy2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_d1ikq"]
 animations = [{
@@ -132,13 +133,11 @@ sprite_frames = SubResource("SpriteFrames_d1ikq")
 animation = &"move_up"
 autoplay = "default"
 
-[node name="Camera3D" type="Camera3D" parent="Sprite"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30)
-projection = 1
-size = 12.05
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Sprite"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 31)
+
+[node name="Camera" parent="Sprite" instance=ExtResource("23_unxy2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_duc7h")

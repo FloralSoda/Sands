@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://57d7a7xpl75j"]
+[gd_scene load_steps=5 format=3 uid="uid://57d7a7xpl75j"]
 
+[ext_resource type="Material" uid="uid://gwaqv4wyiopq" path="res://assets/materials/pixel.tres" id="1_3w2iu"]
 [ext_resource type="Material" uid="uid://dklwoyejymph8" path="res://assets/materials/sandbrick.tres" id="1_j5lm7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7cs00"]
@@ -12,5 +13,6 @@
 shape = SubResource("BoxShape3D_7cs00")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-material_override = ExtResource("1_j5lm7")
+material_override = ExtResource("1_3w2iu")
+material_overlay = ExtResource("1_j5lm7")
 mesh = SubResource("BoxMesh_lgccu")
