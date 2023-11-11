@@ -14,7 +14,7 @@ namespace Sands.logic.world.generators
 
         public Chunk GenerateChunk(WorldData data, Vector2I location)
         {
-            return ToRepeat;
+            return ToRepeat.Clone();
         }
     }
 }

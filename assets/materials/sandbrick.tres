@@ -1,9 +1,9 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dklwoyejymph8"]
 
-[ext_resource type="Texture2D" uid="uid://dhjbj8sfkn2ra" path="res://assets/textures/tiles/sandbrick.png" id="1_oyari"]
+[ext_resource type="Texture2D" uid="uid://dhjbj8sfkn2ra" path="res://assets/textures/tiles/sandbrick.png" id="1_tmfag"]
 
 [resource]
 diffuse_mode = 3
 specular_mode = 1
-albedo_texture = ExtResource("1_oyari")
+albedo_texture = ExtResource("1_tmfag")
 texture_filter = 0

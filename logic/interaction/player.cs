@@ -4,6 +4,8 @@ using System.Diagnostics;
 
 public partial class movement : CharacterBody3D
 {
+	[Signal]
+	public delegate void PositionChangedEventHandler(Vector3 new_location);
 	public const float MaxSpeed = 1.9f;
 	public const float RunBoostPerc = 1.5f;
 	public const float Acceleration = 0.5f;

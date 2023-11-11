@@ -5,7 +5,6 @@ using Sands.logic.tile;
 using Sands.logic.world.generators;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
@@ -28,6 +27,13 @@ namespace Sands.logic.world
         /// </summary>
         public const byte EdgeLength = 32;
 
+        private Chunk(HashSet<byte> available_ids, Dictionary<byte, string> local_ids, Dictionary<string, byte> id_reference, Dictionary<byte, uint> tile_quantities, byte[,,] blockMap) {
+            this.available_ids = available_ids;
+            this.local_ids = local_ids;
+            this.id_reference = id_reference;
+            this.tile_quantities = tile_quantities;
+            this.blockMap = blockMap;
+        }
         /// <summary>
         /// Creates an empty Chunk
         /// </summary>
@@ -72,6 +78,17 @@ namespace Sands.logic.world
         public int GetRemainingIdCount()
         {
             return available_ids.Count;
+        }
+        /// <summary>
+        /// Returns the tile id associated with the local id provided
+        /// </summary>
+        /// <param name="id">The local id to retrieve the tile id for</param>
+        /// <returns>The tile id related to the local id. Null if that string is not found</returns>
+        public string? GetTileIdOf(byte id) {
+            if (local_ids.ContainsKey(id))
+                return local_ids[id];
+            else
+                return null;
         }
         /// <summary>
         /// Returns what local numeric id is assigned to the tile provided.
@@ -180,6 +197,7 @@ namespace Sands.logic.world
                 if (GetTileCount(blockMap[pos.X, pos.Y, pos.Z]) == 1)
                 {
                     local_ids[blockMap[pos.X, pos.Y, pos.Z]] = id;
+                    return true;
                 } else
                     return false;
             }
@@ -259,6 +277,29 @@ namespace Sands.logic.world
                 return true;
             }
         }
+
+        public void GetMap() {
+            throw new NotImplementedException("High performance map iteration is not yet implemented");
+        }
+
+        /// <summary>
+        /// Creates a new chunk with the exact same contents as this chunk
+        /// </summary>
+        /// <returns>A new chunk with identical contents</returns>
+        public Chunk Clone() {
+            HashSet<byte> ids = new(available_ids);
+            Dictionary<byte, string> locals = new(local_ids);
+            Dictionary<string, byte> refs = new(id_reference);
+            Dictionary<byte, uint> quants = new(tile_quantities);
+            byte[,,] map = new byte[blockMap.GetLength(0),blockMap.GetLength(1),blockMap.GetLength(2)];
+            for (int x = map.GetLength(0); x >= 0; --x)
+                for (int y = map.GetLength(1); y >= 0; --y)
+                    for (int z = map.GetLength(2); z >= 0; --z)
+                        map[x, y, z] = blockMap[x, y, z];
+
+
+            return new(ids, locals, refs, quants, map);
+        }
     }
 
     /// <summary>
@@ -275,22 +316,27 @@ namespace Sands.logic.world
         /// The seed used for all randomisation on the seed
         /// </summary>
         public ulong Seed;
+        /// <summary>
+        /// The height of this world in tiles
+        /// </summary>
+        public byte WorldHeight;
 
         /// <summary>
         /// Build a world from premade chunk data
         /// </summary>
         /// <param name="worldData">The chunk data to load</param>
-        public WorldData(Dictionary<Vector2I, Chunk> worldData, IWorldGenerator worldGenerator)
+        public WorldData(Dictionary<Vector2I, Chunk> worldData, IWorldGenerator worldGenerator, byte worldHeight)
         {
             this.worldData = worldData;
-            this.WorldGenerator = worldGenerator;
+            WorldGenerator = worldGenerator;
+            WorldHeight = worldHeight;
         }
 
         /// <summary>
         /// Build a world from a data stream serving bytes. Does not close provided stream
         /// </summary>
         /// <param name="stream">The stream to read from. Assumes world data starts at current header position</param>
-        public WorldData(Stream stream, IWorldGenerator worldGenerator)
+        public WorldData(Stream stream, IWorldGenerator worldGenerator, byte worldHeight)
         {
             throw new NotImplementedException("World data format is still WIP");
         }
@@ -299,11 +345,12 @@ namespace Sands.logic.world
         /// Generate a new world from the seed.
         /// </summary>
         /// <param name="seed">The seed to start the world with</param>
-        public WorldData(ulong seed, IWorldGenerator worldGenerator)
+        public WorldData(ulong seed, IWorldGenerator worldGenerator, byte worldHeight)
         {
             this.Seed = seed;
             this.WorldGenerator = worldGenerator;
             worldData = new();
+            this.WorldHeight = worldHeight;
         }
 
         private Chunk generateChunkAt(Vector2I pos)
