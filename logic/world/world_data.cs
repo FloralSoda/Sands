@@ -132,12 +132,31 @@ namespace Sands.logic.world
             return local_ids[blockMap[pos.X, pos.Y, pos.Z]];
         }
         /// <summary>
+        /// Finds the first instance of the tile in the map. Searches Z-Y-X
+        /// </summary>
+        /// <param name="id">The id of the tile to find</param>
+        /// <returns>The coordinates of the first instance of that tile found</returns>
+        public (int, int, int) GetTilePos(string tile)
+        {
+            byte? id_nullable = GetLocalIdOf(tile);
+            if (id_nullable == null)
+                return (-1, -1, -1);
+            byte id = id_nullable.Value;
+
+            for (int i = blockMap.GetLowerBound(0); i <= blockMap.GetUpperBound(0); i++)
+                for (int j = blockMap.GetLowerBound(1); j <= blockMap.GetUpperBound(1); j++)
+                    for (int k = blockMap.GetLowerBound(2); k <= blockMap.GetUpperBound(2); k++)
+                        if (blockMap[i,j, k] == id)
+                            return (i, j, k);
+            return (-1, -1, -1);
+        }
+        /// <summary>
         /// Decreases the tracker for the amount of tiles in a chunk. 
         /// </summary>
         /// <param name="id">The id of the tile to decrease the count for</param>
         /// <returns>The amount of tiles remaining after decrement. 0 means there are no more of that tile</returns>
         private uint decreaseTile(byte id, uint count = 1) {
-            uint after_decrement = --tile_quantities[id];
+            uint after_decrement = tile_quantities[id] -= count;
             if (after_decrement == 0)
             {
                 tile_quantities.Remove(id);
@@ -156,7 +175,7 @@ namespace Sands.logic.world
         /// <returns>The amount of tiles remaining after increment</returns>
         private uint increaseTile(byte id, uint count = 1)
         {
-            return ++tile_quantities[id];
+            return tile_quantities[id] += count;
         }
         /// <summary>
         /// Gets the amount of a certain tile within the chunk. Near zero cost
@@ -267,13 +286,21 @@ namespace Sands.logic.world
                 //Can update tile order live as there is a free id slot to use as buffer
                 byte local_id = (byte)local_id_nullable;
 
-                for (int x = from.X; x < to.X; ++x)
-                    for (int y = from.Y; y < to.Y; ++y)
-                        for (int z = from.Z; z < to.Z; ++z)
+                for (int x = from.X; x <= to.X; ++x)
+                    for (int y = from.Y; y <= to.Y; ++y)
+                        for (int z = from.Z; z <= to.Z; ++z)
                         {
-                            ++destroy_count[blockMap[x, y, z]];
-                            blockMap[x, y, z] = local_id;
+                            if (blockMap[x, y, z] != local_id)
+                            {
+                                ++destroy_count[blockMap[x, y, z]];
+                                blockMap[x, y, z] = local_id;
+                            }
                         }
+
+                for (byte i = 0; i < destroy_count.Length; ++i)
+                    if (destroy_count[i] > 0)
+                        decreaseTile(i, destroy_count[i]);
+
                 return true;
             }
         }
@@ -292,9 +319,9 @@ namespace Sands.logic.world
             Dictionary<string, byte> refs = new(id_reference);
             Dictionary<byte, uint> quants = new(tile_quantities);
             byte[,,] map = new byte[blockMap.GetLength(0),blockMap.GetLength(1),blockMap.GetLength(2)];
-            for (int x = map.GetLength(0); x >= 0; --x)
-                for (int y = map.GetLength(1); y >= 0; --y)
-                    for (int z = map.GetLength(2); z >= 0; --z)
+            for (int x = 0; x < map.GetLength(0); ++x)
+                for (int y = 0; y < map.GetLength(1); ++y)
+                    for (int z = 0; z < map.GetLength(2); ++z)
                         map[x, y, z] = blockMap[x, y, z];
 
 
@@ -347,10 +374,10 @@ namespace Sands.logic.world
         /// <param name="seed">The seed to start the world with</param>
         public WorldData(ulong seed, IWorldGenerator worldGenerator, byte worldHeight)
         {
-            this.Seed = seed;
-            this.WorldGenerator = worldGenerator;
+            Seed = seed;
+            WorldGenerator = worldGenerator;
             worldData = new();
-            this.WorldHeight = worldHeight;
+            WorldHeight = worldHeight;
         }
 
         private Chunk generateChunkAt(Vector2I pos)

@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Diagnostics;
 
-public partial class movement : CharacterBody3D
+public partial class player : CharacterBody3D
 {
 	[Signal]
 	public delegate void PositionChangedEventHandler(Vector3 new_location);
@@ -32,8 +32,8 @@ public partial class movement : CharacterBody3D
 		// Get the input direction and handle the movement/deceleration.
 		Vector2 inputDir = Input.GetVector("motion_left", "motion_right", "motion_up", "motion_down").Rotated(Mathf.DegToRad(-45));
 
-		string animation = "move_";
-		if (Input.IsActionPressed("motion_left"))
+        string animation;
+        if (Input.IsActionPressed("motion_left"))
 			animation = "move_left";
 		else if (Input.IsActionPressed("motion_right"))
 			animation = "move_right";
