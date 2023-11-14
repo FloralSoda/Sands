@@ -19,3 +19,5 @@ _surfaces = [{
 mesh = SubResource("ArrayMesh_cxu1v")
 surface_material_override/0 = ExtResource("1_7k1us")
 script = ExtResource("1_d0hwr")
+XRenderDistance = 2
+YRenderDistance = 2

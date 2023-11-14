@@ -1,4 +1,6 @@
 using Godot;
+using Sands.logic.tile;
+using Sands.logic.world;
 using System;
 using System.Diagnostics;
 
@@ -6,10 +8,16 @@ public partial class player : CharacterBody3D
 {
 	[Signal]
 	public delegate void PositionChangedEventHandler(Vector3 new_location);
+	[Export]
 	public const float MaxSpeed = 1.9f;
+	[Export]
 	public const float RunBoostPerc = 1.5f;
+	[Export]
 	public const float Acceleration = 0.5f;
+	[Export]
 	public const float Friction = 0.2f;
+	[Export]
+	public const float TerminalSpeed = 2.5f;
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
@@ -25,10 +33,15 @@ public partial class player : CharacterBody3D
 	{
 		Vector3 velocity = Velocity;
 
-		// Add the gravity.
-		if (!IsOnFloor())
-			velocity.Y -= gravity * (float)delta;
-
+		if (WorldData.CurrentWorld != null)
+		{
+			Vector3I tilePos = new((int)Position.X, (int)Position.Y, (int)Position.Z);
+			if (!IsOnFloor() && WorldData.CurrentWorld.GetTileAt(tilePos + new Vector3I(0, (int)velocity.Y, 0)) == TileRegistry.AIR)
+				// Add the gravity.
+				velocity.Y -= Math.Min(gravity * (float)delta, TerminalSpeed);
+			else
+				velocity.Y = Math.Max(velocity.Y, 0);
+		}
 		// Get the input direction and handle the movement/deceleration.
 		Vector2 inputDir = Input.GetVector("motion_left", "motion_right", "motion_up", "motion_down").Rotated(Mathf.DegToRad(-45));
 

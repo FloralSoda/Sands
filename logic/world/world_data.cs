@@ -327,6 +327,14 @@ namespace Sands.logic.world
 
             return new(ids, locals, refs, quants, map);
         }
+        /// <summary>
+        /// Wraps the given coordinates into local chunk coordinates. Calculated with 4 modulo calls
+        /// </summary>
+        /// <param name="pos">The coordinates to wrap</param>
+        /// <returns>The local coordinates within a chunk.</returns>
+        public static Vector3I GetAsChunkPos(Vector3 pos) {
+            return new Vector3I(((int)pos.X % EdgeLength + EdgeLength) % EdgeLength, (int)pos.Y, ((int)pos.Z % EdgeLength + EdgeLength)%EdgeLength);
+        }
     }
 
     /// <summary>
@@ -334,6 +342,13 @@ namespace Sands.logic.world
     /// </summary>
     public partial class WorldData
     {
+        /// <summary>
+        /// The currently loaded world. All objects access this
+        /// </summary>
+        public static WorldData? CurrentWorld { get; private set; }
+        public static void SetWorld(WorldData world) {
+            CurrentWorld = world;
+        }
         private readonly Dictionary<Vector2I, Chunk> worldData;
         /// <summary>
         /// The generator used for producing new chunks
@@ -411,6 +426,16 @@ namespace Sands.logic.world
                 return chunk;
             else
                 return null;
+        }
+        /// <summary>
+        /// Gets the tile present at the specified global coordinates, accounting for chunks
+        /// </summary>
+        /// <param name="pos">The position to get the tile for</param>
+        /// <returns>The tile id at that location</returns>
+        public string? GetTileAt(Vector3I pos) {
+            Vector2I chunkPos = new(pos.X / Chunk.EdgeLength, pos.Z / Chunk.EdgeLength);
+            Chunk chunk_containing_position = RequestChunkAt(chunkPos);
+            return chunk_containing_position.GetTileAt(Chunk.GetAsChunkPos(pos));
         }
     }
 }
