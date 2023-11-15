@@ -1,0 +1,12 @@
+{
+	"recommendations": [
+		"aaron-bond.better-comments",
+		"vadimcn.vscode-lldb",
+		"streetsidesoftware.code-spell-checker",
+		"serayuzgur.crates",
+		"tamasfe.even-better-toml",
+		"1yib.rust-bundle",
+		"dustypomerleau.rust-syntax",
+		"rust-lang.rust-analyzer"
+	]
+}
