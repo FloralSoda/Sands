@@ -2,7 +2,6 @@ using Godot;
 using Sands.logic.tile;
 using Sands.logic.world;
 using System;
-using System.Diagnostics;
 
 public partial class player : CharacterBody3D
 {
@@ -18,6 +17,8 @@ public partial class player : CharacterBody3D
 	public const float Friction = 0.2f;
 	[Export]
 	public const float TerminalSpeed = 2.5f;
+	[Export]
+	public const float SkidFrictionMultiplier = 2f;
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
@@ -87,8 +88,8 @@ public partial class player : CharacterBody3D
 				}
 			} else
 			{
-                velocity.X = Mathf.MoveToward(Velocity.X, 0, Friction);
-                velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Friction);
+                velocity.X = Mathf.MoveToward(Velocity.X, 0, Friction * SkidFrictionMultiplier);
+                velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Friction * SkidFrictionMultiplier);
             }
 
         }
@@ -100,5 +101,9 @@ public partial class player : CharacterBody3D
 
 		Velocity = velocity;
 		MoveAndSlide();
+		if (velocity.Length() > 0)
+		{
+			EmitSignal(SignalName.PositionChanged, Position);
+		}
 	}
 }

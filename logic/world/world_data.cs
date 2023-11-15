@@ -123,13 +123,25 @@ namespace Sands.logic.world
             return null;
         }
         /// <summary>
+        /// Checks if the provided local position is within the bounds of the chunk
+        /// </summary>
+        /// <param name="pos">The position to check</param>
+        /// <returns><see langword="true"/> if the horizontal is within <see cref="EdgeLength"/> and the vertical is within the world height</returns>
+        public bool IsInChunk(Vector3I pos)
+        {
+            return pos.X >= 0 && pos.X < EdgeLength && pos.Y >= 0 && pos.Y < blockMap.GetLength(1) && pos.Z >= 0 && pos.Z < EdgeLength;
+        }
+        /// <summary>
         /// Gets the string id of the tile located at the relative coordinates provided
         /// </summary>
         /// <param name="pos">The position to get the tile id of</param>
-        /// <returns>The tile id at the position specified</returns>
+        /// <returns>The tile id at the position specified. Returns an empty string if the request was outside the bounds of the chunk</returns>
         public string GetTileAt(Vector3I pos)
         {
-            return local_ids[blockMap[pos.X, pos.Y, pos.Z]];
+            if (IsInChunk(pos))
+                return local_ids[blockMap[pos.X, pos.Y, pos.Z]];
+            else
+                return "";
         }
         /// <summary>
         /// Finds the first instance of the tile in the map. Searches Z-Y-X
