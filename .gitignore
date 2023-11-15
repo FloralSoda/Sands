@@ -1,8 +1,1 @@
-# Edtior specific ignores
-.godot/
-.vs/
-
-# Helper file ignores
-assets/audio
-assets/models
-assets/textures
+/target
