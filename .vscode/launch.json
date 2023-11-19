@@ -27,6 +27,26 @@
 		{
 			"type": "lldb",
 			"request": "launch",
+			"name": "Sands Trace",
+			"cargo": {
+				"args": [
+					"build",
+					"--bin=sands",
+					"--package=sands"
+				],
+				"filter": {
+					"name": "sands",
+					"kind": "bin"
+				}
+			},
+			"args": [
+				"-vtrace"
+			],
+			"cwd": "${workspaceFolder}"
+		},
+		{
+			"type": "lldb",
+			"request": "launch",
 			"name": "Sands Unit Tests",
 			"cargo": {
 				"args": [

@@ -1,0 +1,15 @@
+{
+	"cSpell.words": [
+		"Framebuffer",
+		"framebuffers",
+		"Multisample",
+		"subpass",
+		"Swapchain"
+	],
+	"rust-analyzer.linkedProjects": [
+		".\\Cargo.toml",
+		".\\Cargo.toml",
+		".\\Cargo.toml",
+		".\\Cargo.toml"
+	]
+}
