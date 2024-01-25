@@ -1,0 +1,3 @@
+[submodule "heatwave"]
+	path = heatwave
+	url = https://github.com/FloralSoda/heatwave
