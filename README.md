@@ -1,13 +1,14 @@
-# Sands & Heatwave
+5# Sands & Heatwave
 Welcome to the GitHub repository for the Sands game.
 
 Sands is a 2.5D isometric voxel exploration and sandbox game. It is designed as a way for us to experiment with novel game mechanics and powerful integration of music into voxel games.
-
 
 ## Blurb
 **Best enjoyed with headphones 🎧**
 
 You find yourself stranded in the middle of a desert with nothing but dunes and the sweltering sun. The world is quiet and isolating with only the wind to keep you company. As you explore this seemingly empty expanse, you will come across small hints of life, such as dead plants, succulents and ruins. As you approach these and more, music and motif will start to fill your ears, your knowledge and comfort within the world directly correlating to the music score.
+
+Find yourself exploring ruins, building grand buildings, filling the world with technology or biology as you progress from humble beginnings to a flourishing ruler of the lands.
 
 ## Study
 Currently, this game is geared to helping the programmer get familiar with working with the GPU, specifically graphics and rendering, as well as helping the programmer understand how to use middleware, such as wwise.\
