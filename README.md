@@ -1,4 +1,4 @@
-5# Sands & Heatwave
+# Sands & Heatwave
 Welcome to the GitHub repository for the Sands game.
 
 Sands is a 2.5D isometric voxel exploration and sandbox game. It is designed as a way for us to experiment with novel game mechanics and powerful integration of music into voxel games.

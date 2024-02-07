@@ -1,0 +1,8 @@
+{
+	"rust-analyzer.linkedProjects": [
+		".\\heatwave\\Cargo.toml"
+	],
+	"cSpell.words": [
+		"wgpu"
+	]
+}
